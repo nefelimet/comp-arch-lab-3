@@ -1,0 +1,33 @@
+$ python GEM5ToMcPAT.py "../../stats.txt" "../../config.json" "../mcpat/ProcessorDescriptionFiles/inorder_arm.xml"
+Reading GEM5 stats from: ../../stats.txt
+	Warning (stats): system.mem_ctrls0.writeRowHitRate is nan. Setting it to 0
+	Warning (stats): system.mem_ctrls1.writeRowHitRate is nan. Setting it to 0
+	Warning (stats): system.cpu_cluster.l2.avg_blocked_cycles::no_mshrs is nan. Setting it to 0
+	Warning (stats): system.cpu_cluster.l2.avg_blocked_cycles::no_targets is nan. Setting it to 0
+	Warning (stats): system.cpu_cluster.cpus.icache.avg_blocked_cycles::no_mshrs is nan. Setting it to 0
+	Warning (stats): system.cpu_cluster.cpus.icache.avg_blocked_cycles::no_targets is nan. Setting it to 0
+	Warning (stats): system.cpu_cluster.cpus.itb_walker_cache.avg_blocked_cycles::no_mshrs is nan. Setting it to 0
+	Warning (stats): system.cpu_cluster.cpus.itb_walker_cache.avg_blocked_cycles::no_targets is nan. Setting it to 0
+	Warning (stats): system.cpu_cluster.cpus.itb_walker_cache.tags.avg_refs is nan. Setting it to 0
+	Warning (stats): system.cpu_cluster.cpus.dtb_walker_cache.avg_blocked_cycles::no_mshrs is nan. Setting it to 0
+	Warning (stats): system.cpu_cluster.cpus.dtb_walker_cache.avg_blocked_cycles::no_targets is nan. Setting it to 0
+	Warning (stats): system.cpu_cluster.cpus.dtb_walker_cache.tags.avg_refs is nan. Setting it to 0
+	Warning (stats): system.cpu_cluster.cpus.dcache.avg_blocked_cycles::no_mshrs is nan. Setting it to 0
+	Warning (stats): system.cpu_cluster.cpus.dcache.avg_blocked_cycles::no_targets is nan. Setting it to 0
+Reading config from: ../../config.json
+Reading McPAT template from: ../mcpat/ProcessorDescriptionFiles/inorder_arm.xml
+***WARNING: system.cpu does not exist in config.***
+	 Please use the right config param in your McPAT template file
+***WARNING: system.cpu.decodeInputWidth does not exist in config.***
+	 Please use the right config param in your McPAT template file
+Traceback (most recent call last):
+  File "GEM5ToMcPAT.py", line 181, in <module>
+    main()
+  File "GEM5ToMcPAT.py", line 53, in main
+    dumpMcpatOut(opts.out)
+  File "GEM5ToMcPAT.py", line 80, in dumpMcpatOut
+    exprs[i] = str(eval(exprs[i]))
+  File "<string>", line 1
+    {u'kernel': u''
+                  ^
+SyntaxError: unexpected EOF while parsing
