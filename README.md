@@ -53,9 +53,13 @@ x1 / x2 = 0.516  ή  x2 = 2 * x1.
 
 #### Ερώτημα 1
 Ανοίγοντας το αρχείο *GEM5ToMcPAT . py*, στην γραμμή 38 βλέπουμε το usage. Η εντολή που χρησιμοποιούμε για να το τρέξουμε είναι (μέσα στον φάκελο Scripts):
- ``python GEM5ToMcPAT.py "../../stats.txt" "../../config.json" "../mcpat/ProcessorDecriptionFiles/ARM_A9_2GHz.xml"``
+
+	 $ python GEM5ToMcPAT.py "../../stats.txt" "../../config.json" "../mcpat/ProcessorDecriptionFiles/ARM_A9_2GHz.xml"
+	 
  Τρέχοντας αυτήν την εντολή, δημιουργείται στον φάκελο ένα αρχείο με το όνομα *mcpat-out.xml*. 
- 
+ Για το μέγεθος *area*, το βρίσκουμε απ'το output του McPAT.
+ Για το *delay*
+ Για το *energy*
  
 
 #### Ερώτημα 2
