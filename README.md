@@ -53,5 +53,8 @@ x1 / x2 = 0.516  ή  x2 = 2 * x1.
 
 ### Κριτική
 
-
-
+### Πηγές
+* Sheng Li, "McPAT: An Integrated Power, Area, and Timing Modeling Framework for Multicore and Manycore Architectures"
+* Sheng Li, "McPAT 1.0: An Integrated Power, Area, and Timing Modeling Framework for Multicore Architectures"
+* Vasanth Venkatachalam, Michael Franz, "Power Reduction Techniques For Microprocessor Systems"
+* Yi-Ping You, "Compilers for Leakage Power Reduction"
