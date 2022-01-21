@@ -52,14 +52,45 @@ x1 / x2 = 0.516  ή  x2 = 2 * x1.
 ### Βήμα 2
 
 #### Ερώτημα 1
+Για την συμβατότητα του output του GEM5 με το input του McPAT, χρησιμοποιείται το script *GEM5ToMcPAT . py* . Χρησιμοποιώντας και το [TAKEKYA/gem5tomcpat](https://github.com/TAKAKEYA/gem5tomcpat) GitHub repo, βλέπουμε ότι στο xml αρχείο πρέπει να αλλάξουμε τις παραμέτρους σύμφωνα με το πώς υπάρχουν στο *stats.txt* και στο *config.json*. Λόγω παλιάς έκδοσης του McPAT, χρησιμοποιεί τις μετβαλητές *system.cpu* αντί για *system.cpu_cluster.cpus* που χρησιμοποιεί το GEM5. Οπότε χρειάστηκε να αλλάξουμε αυτά αλλά και κάποια άλλα ονόματα μεταβλητών (*system.l2* -> *system.cpu_cluster.l2*, *system.mem_ctrls* -> *system.mem_ctrls0*) στο *stats.txt* και στο *config.json*. Ωστόσο, κάποιες μεταβλητές στο xml δεν υπήρχαν καθόλου στα *stats.txt* και *config.json*, όπως το *stats.system.mem_ctrls0.mem_writes::total*. Οπότε το τελικό script δεν μπόρεσε να τρέξει σωστά.
 Ανοίγοντας το αρχείο *GEM5ToMcPAT . py*, στην γραμμή 38 βλέπουμε το usage. Η εντολή που χρησιμοποιούμε για να το τρέξουμε είναι (μέσα στον φάκελο Scripts):
 
 	 $ python GEM5ToMcPAT.py "../../stats.txt" "../../config.json" "../mcpat/ProcessorDecriptionFiles/ARM_A9_2GHz.xml"
 	 
- Τρέχοντας αυτήν την εντολή, δημιουργείται στον φάκελο ένα αρχείο με το όνομα *mcpat-out.xml*. 
+ Τρέχοντας αυτήν την εντολή, δημιουργείται στον φάκελο ένα αρχείο με το όνομα *mcpat-out.xml*. Τρέξαμε την εντολή για το *ARM_A9_2GHz.xml* αντί για το *inorder_arm.xml*.
+
  Για το μέγεθος *area*, το βρίσκουμε απ'το output του McPAT.
- Για το *delay*
- Για το *energy*
+ 
+ Για το *delay* στο αρχείο *stats.txt* βρίσκουμε τις εξής παραμέτρους:
+ * *system.membus.pwrStateResidencyTicks*
+ * *system.mem_ctrls0.pwrStateResidencyTicks*
+ * *system.mem_ctrls1.pwrStateResidencyTicks*
+ * *system.cpu_cluster.toL2Bus.pwrStateResidencyTicks*
+ * *system.cpu_cluster.l2.pwrStateResidencyTicks*
+ * *system.cpu_cluster.l2.tags.pwrStateResidencyTicks*
+ * *system.cpu_cluster.cpus.pwrStateResidencyTicks*
+ * *system.cpu_cluster.cpus.icache.pwrStateResidencyTicks*
+ * *system.cpu_cluster.cpus.icache.tags.pwrStateResidencyTicks*
+ * *system.cpu_cluster.cpus.dtb.walker.pwrStateResidencyTicks*
+ * *system.cpu_cluster.cpus.dtb.stage2_mmu.stage2_tlb.pwrStateResidencyTicks*
+ * *system.cpu_cluster.cpus.itb_walker_cache.pwrStateResidencyTicks*
+ * *system.cpu_cluster.cpus.itb_walker_cache.tags.pwrStateResidencyTicks*
+ * *system.cpu_cluster.cpus.dtb_walker_cache.pwrStateResidencyTicks*
+ * *system.cpu_cluster.cpus.dtb_walker_cache.tags.pwrStateResidencyTicks*
+ * *system.cpu_cluster.cpus.dcache.pwrStateResidencyTicks*
+ * *system.cpu_cluster.cpus.dcache.tags.pwrStateResidencyTicks*
+ * *system.cpu_cluster.cpus.itb.walker.pwrStateResidencyTicks*
+ * *system.cpu_cluster.cpus.itb.stage2_mmu.stage2_tlb.pwrStateResidencyTicks*
+
+Αυτές οι παράμετροι έχουν ως σχόλιο *Cumulative time (in ticks) in various power states*, οπότε πρόκειται για συνολικούς χρόνους σε χτύπους ρολογιού για καθένα απ'αυτά τα εξαρτήματα. Έχουν όλα την τιμή 35144000.
+ 
+ Για το *energy* στο αρχείο *stats.txt* βρίσκουμε τις εξής παραμέτρους:
+ * *system.mem_ctrls0.rank1.totalEnergy* = 18720000 pJ
+ * *system.mem_ctrls0.rank0.totalEnergy* = 19952370 pJ
+ * *system.mem_ctrls1.rank1.totalEnergy* = 19011960 pJ
+ * *system.mem_ctrls1.rank0.totalEnergy* = 19799535 pJ
+
+Αθροίζοντας τις τιμές αυτές βρίσκουμε συνολική ενέργεια 77483865 pJ για τα memory controls. 
  
 
 #### Ερώτημα 2
@@ -73,3 +104,4 @@ x1 / x2 = 0.516  ή  x2 = 2 * x1.
 * Sheng Li, "McPAT 1.0: An Integrated Power, Area, and Timing Modeling Framework for Multicore Architectures"
 * Vasanth Venkatachalam, Michael Franz, "Power Reduction Techniques For Microprocessor Systems"
 * Yi-Ping You, "Compilers for Leakage Power Reduction"
+* [TAKAKEYA/gem5tomcpat](https://github.com/TAKAKEYA/gem5tomcpat)
